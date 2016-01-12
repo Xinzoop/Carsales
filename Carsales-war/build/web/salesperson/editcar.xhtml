@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Update Car</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Operation</div>
+                    <div class="panel-body">                     
+                        <f:ajax render="car_info msg" execute="@form">
+                            <h:commandLink class="btn btn-success btn-block" action="#{carListBean.updateCar()}">
+                                <span class="glyphicon glyphicon-floppy-save"></span>Update</h:commandLink>
+                        </f:ajax>                
+                        <h:commandLink class="btn btn-default btn-block" action="#{carListBean.cancelEdit()}">
+                            <span class="glyphicon glyphicon-remove-circle"></span>Cancel
+                        </h:commandLink>
+                    </div>
+                </div>
+                                <h:panelGroup layout="block" id='msg'>
+                                    <h:outputLabel class="alert alert-danger" rendered="#{not empty carListBean.message}" value="#{carListBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>Update Car</h3>
+                <hr />
+                <h:panelGroup layout="block" class="form-horizontal" id="car_info">
+                    <div class="form-group">
+                        <h:outputLabel for="tbxVIN" value="VIN:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <p id="tbxVIN" class="form-control-static">#{carListBean.car.VIN}</p>
+                        </div>
+                        <h:message for="tbxVIN" class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxMake" value="Make:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxMake" value="#{carListBean.car.make}" required="true" class="form-control"
+                                         requiredMessage="Please enter make or manufacturer.">
+                                <f:ajax event="blur" execute="@this" render="mMake" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxMake" id='mMake' class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxModel" value="Model:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxModel" value="#{carListBean.car.modelName}" required="true" class="form-control"
+                                         requiredMessage="Please enter model name.">
+                                <f:ajax event="blur" execute="@this" render="mModel" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxModel" id='mModel' class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxModelNo" value="Model No.:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxModelNo" value="#{carListBean.car.modelNo}" required="true" class="form-control"
+                                         requiredMessage="Please enter model number.">
+                                <f:ajax event="blur" execute="@this" render="mModelNo" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxModelNo" id='mModelNo' class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="ddlType" value="Type:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:selectOneMenu id="ddlType" value="#{carListBean.car.type}" class="form-control">
+                                <f:selectItems value="#{carListBean.carTypes}"></f:selectItems>
+                            </h:selectOneMenu>
+                        </div>
+                        <h:message for="ddlType" class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxPrice" value="Price:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxPrice" value="#{carListBean.car.price}" required="true" class="form-control"
+                                         requiredMessage="Please enter the price." >
+                                <f:ajax event="blur" execute="@this" render="mPrice" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxPrice" id='mPrice' class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxDesc" value="Description:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputTextarea id="tbxDesc" rows="6" value="#{carListBean.car.description}" class="form-control"/>
+                        </div>
+                        <h:message for="tbxDesc" class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxURL" value="Preview URL:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxURL" value="#{carListBean.car.previewURL}" class="form-control"/>
+                        </div>
+                        <h:message for="tbxURL" class="col-sm-4 alert-danger" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel for="tbxThumbnail" value="Thumbnail:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxThumbnail" value="#{carListBean.car.thumbnail}" class="form-control">
+                                <f:ajax event="blur" execute="@this" render="mThumbnail" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxThumbnail" id='mThumbnail' class="col-sm-4 alert-danger" />
+                    </div>
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

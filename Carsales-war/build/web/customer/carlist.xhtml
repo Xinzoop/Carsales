@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Search Cars</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Search</div>
+                    <div class="panel-body form-horizontal">
+                        <div class="form-group">
+                            <h:outputLabel for="tbxMake" value="Make:" class="col-sm-2" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxMake" value="#{carListBean.make}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxModel" value="Model Name:" class="col-sm-2" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxModel" value="#{carListBean.modelName}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxModelNum" value="Model No.:" class="col-sm-2" />
+                            <div class="col-sm-10">                            
+                                <h:inputText id="tbxModelNum" value="#{carListBean.modelNo}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="ddlType" value="Type:" class="col-sm-2" />
+                            <div class="col-sm-10">
+                                <h:selectOneMenu id="ddlType" value="#{carListBean.type}" class="form-control">
+                                    <f:selectItems value="#{carListBean.carTypes}" />
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <f:ajax render="car_list msg" execute="@form">
+                            <h:commandLink class="btn btn-primary btn-block" action="#{carListBean.searchCars()}">
+                                <span class="glyphicon glyphicon-search"></span>Search
+                            </h:commandLink>
+                        </f:ajax>
+                        <h:commandLink class="btn btn-primary btn-block" rendered="#{facesContext.externalContext.isUserInRole('Salesperson')}" action="#{carListBean.newCar()}">
+                            <span class="glyphicon glyphicon-plus-sign"></span>New
+                        </h:commandLink>
+                    </div>
+                </div>
+                                
+                                <h:panelGroup layout="block" id='msg'>
+                                    <h:outputLabel class="alert alert-danger" rendered="#{not empty carListBean.message}" value="#{carListBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>Search Cars</h3>
+                <h:dataTable id="car_list" value="#{carListBean.cars}" var="c" class="table">
+                    <h:column>
+                        <f:facet name="header">Thumbnail</f:facet>
+                        <img width="240" height="160" class="thumbnail" src="#{c.thumbnail}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price / Make / Model / Type</f:facet>
+                        <p><strong>Price:</strong>$#{c.price}</p>
+                        <p><strong>Make:</strong>#{c.make}</p>
+                        <p><strong>Model:</strong>#{c.modelName}</p>
+                        <p><strong>Model No:</strong>#{c.modelNo}</p>
+                        <p><strong>Type:</strong>#{c.type}</p>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Show</f:facet>   
+                        <h:commandLink value="Details" action="#{carListBean.showCar(c)}" />
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

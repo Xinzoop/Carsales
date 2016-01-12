@@ -1,0 +1,101 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 19, 2015, 1:09:37 PM
+    Author     : zipv5_000
+*/
+
+.slogon{
+    font-family: 'Berlin Sans FB', Arial, Helvetica, sans-serif;
+    font-size: large;
+    color: #b200ff;
+    vertical-align: bottom;
+}
+.user_status{
+        font-family: 'Berlin Sans FB', Arial, Helvetica, sans-serif;
+    font-size: large;
+    color: #b200ff;
+    vertical-align: bottom;
+}
+#footer{
+    width: 100%;
+    padding: 10px 0;
+    background-color: lightgrey;
+}
+.menu{
+    height: 36px;
+    background-color: #0094ff;
+    color: white;
+    font-size: large;
+    padding: auto;
+}
+.menu>ul{
+    margin:0;
+}
+.menu>ul>li{
+    display:inline;
+}
+
+.menu a{
+    color: white;
+    font-size: x-large;
+    text-decoration:none;
+    padding: 5px;
+}
+.menu a:hover{
+    background-color:burlywood;
+    color:#0094ff;
+}
+.cur_menu{
+    background-color:burlywood;
+    color:#0094ff;
+}
+.user_area{
+    margin-left: 20px;
+    font-size: large;
+    font-weight: bold;
+}
+.user_area a{
+    font-size: xx-large;
+    font-weight: bold;
+    color: gray;
+    text-decoration: none;
+}
+.user_area a:hover{
+    color: #b200ff;
+}
+.user_oper{
+}
+.user_oper table td{
+    padding:5px 0;
+}
+.user_oper tfoot td{
+    text-align: center;
+}
+.col_align_top{
+    vertical-align: top;
+}
+.col_align_bot{
+    vertical-align: bottom;
+}
+.side{
+    width: 20%;
+    vertical-align: top;
+}
+.content{
+    width: 80%;
+    vertical-align: top;
+}
+.car_result_area{
+    display: inline-block;
+}
+.error_msg{
+    color: red;
+    font-weight: bold;
+}
+.main{
+    width:100%;
+}

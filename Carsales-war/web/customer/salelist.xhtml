@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sales</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">               
+                <h:panelGroup layout="block" id='msg'>
+                    <h:outputLabel class="alert alert-danger" rendered="#{not empty saleListBean.message}" value="#{saleListBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>Sales Record</h3>
+                <hr />
+                <h:dataTable value="#{saleListBean.sales}"
+                             var="s" class="table" id="sales">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{s.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">VIN</f:facet>
+                            #{s.car.VIN}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Customer</f:facet>
+                            #{s.customer.firstName} #{s.customer.lastName}(#{s.customer.id})
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Salesperson</f:facet>
+                            #{s.salesperson.firstName} #{s.salesperson.lastName}(#{s.salesperson.id})
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                            #{s.saleStatus}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Date</f:facet>
+                            #{s.buyAt}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Manage</f:facet>
+                        <h:commandLink value="Details" action="saledetails">
+                            <f:param name="sid" value="#{s.id}" />
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

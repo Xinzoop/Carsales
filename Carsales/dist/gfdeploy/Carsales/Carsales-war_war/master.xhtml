@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="default" name="css/style.css" />
+        <h:outputStylesheet library="bootstrap" name="css/bootstrap.css" />
+    </h:head>
+    <h:body>
+        <h:form id="form" class="container">
+            <div id="header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h:link outcome="/index.xhtml">
+                            <h:graphicImage library="default" name="images/logo.png" />
+                        </h:link>
+                        <p class="slogon">WORLD'S FINEST ONLINE CAR SALES SYSTEM</p>
+                    </div>
+                    <h:panelGroup class='col-md-4 text-right user_status' layout="block" rendered="#{loginBean.user != null}">
+                        <h:outputLabel value="Welcome, #{loginBean.user.firstName}" />
+                        |
+                        <h:commandLink action="#{loginBean.logout()}" immediate="true" value="Logout" />
+                    </h:panelGroup>
+                </div>
+                <h:panelGroup class="menu" layout="block">
+                    <ui:fragment rendered="#{loginBean.user != null}">
+                        <ul>
+                            <ui:fragment rendered="#{facesContext.externalContext.isUserInRole('Customer')}">
+                                <li><h:link outcome="/customer/carlist.xhtml" value="Cars" styleClass="
+                                            #{(view.viewId == '/customer/carlist.xhtml' 
+                                              or view.viewId == '/customer/cardetails.xhtml'
+                                              or view.viewId == '/customer/buycar.xhtml')
+                                              ? 'cur_menu' : ''}" /></li>
+                                <li><h:link outcome="/customer/salelist.xhtml" value="Purchases" styleClass="
+                                            #{(view.viewId == '/customer/salelist.xhtml'
+                                              or view.viewId == '/customer/saledetails.xhtml') 
+                                              ? 'cur_menu' : ''}" /></li>
+                                <li><h:link outcome="/customer/personal.xhtml" value="Personal" 
+                                            styleClass="#{view.viewId == '/customer/personal.xhtml' ? 'cur_menu' : ''}" /></li>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{facesContext.externalContext.isUserInRole('Salesperson')}">
+                                <li><h:link outcome="/customer/salelist.xhtml" value="Sales" styleClass="
+                                            #{(view.viewId == '/customer/salelist.xhtml'
+                                              or view.viewId == '/customer/saledetails.xhtml') 
+                                              ? 'cur_menu' : ''}" /></li>
+                                <li><h:link outcome="/salesperson/userlist.xhtml" value="Customers" styleClass="
+                                            #{(view.viewId == '/salesperson/userlist.xhtml'
+                                              or view.viewId == '/salesperson/userdetails.xhtml'
+                                              or view.viewId == '/salesperson/newuser.xhtml'
+                                              or view.viewId == '/salesperson/edituser.xhtml')
+                                              ? 'cur_menu' : ''}" /></li>
+                                <li><h:link outcome="/customer/carlist.xhtml" value="Cars" styleClass="
+                                            #{(view.viewId == '/customer/carlist.xhtml' 
+                                              or view.viewId == '/customer/cardetails.xhtml'
+                                              or view.viewId == '/salesperson/newcar.xhtml'
+                                              or view.viewId == '/salesperson/editcar.xhtml')
+                                              ? 'cur_menu' : ''}" /></li>                                            
+                                <li><h:link outcome="/customer/personal.xhtml" value="Personal" 
+                                            styleClass="#{view.viewId == '/customer/personal.xhtml' ? 'cur_menu' : ''}" /></li>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{facesContext.externalContext.isUserInRole('Admin')}">
+                                <li><h:link outcome="/salesperson/userlist.xhtml" value="Salesperson" styleClass="
+                                            #{(view.viewId == '/salesperson/userlist.xhtml'
+                                              or view.viewId == '/salesperson/userdetails.xhtml'
+                                              or view.viewId == '/salesperson/newuser.xhtml'
+                                              or view.viewId == '/salesperson/edituser.xhtml')
+                                              ? 'cur_menu' : ''}" /></li>
+                            </ui:fragment>
+                        </ul>
+                    </ui:fragment>
+                </h:panelGroup>
+            </div>
+            <div class="row" id="middle">
+                <div class="col-md-8">
+                    <ui:insert name="content">
+                    </ui:insert>    
+                </div>
+                <div class="col-md-4">
+                    <ui:insert name="side">                        
+                    </ui:insert>    
+                </div>
+            </div>
+            <div id="footer">
+                <h:outputLabel value="Copyright: smallwood 2015" />
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

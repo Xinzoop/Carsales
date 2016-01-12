@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Home</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">               
+                <div class="panel panel-default">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <h:outputLabel for="tbxEmail" value="Email:" />
+                            <h:inputText id="tbxEmail" class="form-control" binding="#{email}"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxPwd" value="Password:" />
+                            <h:inputSecret id="tbxPwd" class="form-control" binding="#{password}" />
+                        </div>
+                        <f:ajax execute="@form" render="msg">
+                        <h:commandButton id="login" class="btn btn-primary" value="Login" action="#{loginBean.login(email.value, password.value)}" />
+                        </f:ajax>
+                    </div>
+                </div>
+                <h:panelGroup layout="block" id='msg'>
+                    <h:outputLabel class="alert alert-danger" rendered="#{not empty loginBean.message}" value="#{loginBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h:graphicImage library="default" class="img-rounded img-responsive" name="images/index_poster.jpg" />
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>View Customers</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Search</div>
+                    <div class="panel-body form-horizontal">
+                        <div class="form-group">
+                            <h:outputLabel for="tbxId" class="control-label col-sm-2" value="ID:" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxId" class="form-control" value="#{userListBean.id}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxFName" class="control-label col-sm-2" value="First Name:" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxFName" class="form-control" value="#{userListBean.fname}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxLName" class="control-label col-sm-2" value="Last Name:" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxLName" class="form-control" value="#{userListBean.lname}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="tbxEmail" class="control-label col-sm-2" value="Email:" />
+                            <div class="col-sm-10">
+                                <h:inputText id="tbxEmail" class="form-control" value="#{userListBean.email}" />
+                            </div>
+                        </div>
+                        <f:ajax render="user_list msg" execute="@form">
+                            <h:commandLink class="btn btn-primary btn-block" action="#{userListBean.findUsers()}"><span class="glyphicon glyphicon-search"></span>Search</h:commandLink>
+                        </f:ajax>
+                        <h:commandLink action="#{userListBean.newUser()}" class="btn btn-primary btn-block">
+                            <span class="glyphicon glyphicon-plus-sign"></span>New</h:commandLink>
+                    </div>
+                </div>
+                                <h:panelGroup layout="block" id='msg'>
+                                    <h:outputLabel class="alert alert-danger" rendered="#{not empty userListBean.message}" value="#{userListBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>#{userListBean.title}</h3>
+                <hr />
+                <h:dataTable id="user_list" class="table" value="#{userListBean.users}" var="c">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{c.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">First Name</f:facet>
+                            #{c.firstName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Last Name</f:facet>
+                            #{c.lastName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                            #{c.email}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Manage</f:facet>   
+                        <h:commandLink value="Details" action="#{userListBean.showUser(c)}" />
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

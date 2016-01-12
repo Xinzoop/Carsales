@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sale Details</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">                
+                <div class="panel panel-default" >
+                    <div class="panel-heading">Operation</div>
+                    <div class="panel-body">
+                        <h:commandLink class="btn btn-primary btn-block" action="salelist">
+                            <span class="glyphicon glyphicon-chevron-left"></span>Back to List
+                        </h:commandLink>
+                        <h:commandLink class="btn btn-success btn-block" action="#{saleBean.confirmPayment()}"
+                                       rendered="#{facesContext.externalContext.isUserInRole('Salesperson') and saleBean.sale.saleStatus == 'Inprogress'}">
+                            <span class="glyphicon glyphicon-ok"></span>Confirm</h:commandLink>                                               
+                        <h:commandLink class="btn btn-danger btn-block" action="#{saleBean.withdrawSale()}"
+                                       rendered="#{facesContext.externalContext.isUserInRole('Salesperson')}">
+                            <span class="glyphicon glyphicon-remove-sign"></span>Withdraw</h:commandLink>
+                    </div>
+                </div>
+                <h:panelGroup layout="block" id='msg'>
+                    <h:outputLabel class="alert alert-danger" rendered="#{not empty saleBean.message}" value="#{saleBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>Sale Details</h3>
+                <hr />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <h:outputLabel value="Sale No.:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.id}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Car VIN:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.car.VIN}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Make:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.car.make}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Model:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.car.modelName}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Price:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>$#{saleBean.sale.car.price}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Customer Name:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.customer.firstName} #{saleBean.sale.customer.lastName}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Salespersons:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.salesperson.firstName} #{saleBean.sale.salesperson.lastName}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Buy At:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.buyAt}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Satus:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.saleStatus}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Last Operated:" class="col-sm-4" />
+                        <div class="col-sm-6">
+                            <p>#{saleBean.sale.confirmAt}</p>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

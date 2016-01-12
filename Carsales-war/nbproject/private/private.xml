@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/carlist.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/personal.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/userdetails.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/mbeans/CarListBean.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/mbeans/UserListBean.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/mbeans/LoginBean.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/userlist.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/mbeans/SaleListBean.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/editcar.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/saledetails.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/newuser.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/buycar.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/mbeans/SaleBean.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/index.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/src/java/fit5042/carsales/validation/PasswordValidator.java</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/cardetails.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/newcar.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/customer/salelist.xhtml</file>
+            <file>file:/F:/Projects/FIT5042/Carsales-war/web/salesperson/edituser.xhtml</file>
+        </group>
+    </open-files>
+</project-private>

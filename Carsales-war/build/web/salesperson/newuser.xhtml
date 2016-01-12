@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>New User</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/master.xhtml">
+            <ui:define name="side">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Operation</div>
+                    <div class="panel-body">          
+                        <f:ajax render="user_info msg" execute="@form">
+                        <h:commandLink class="btn btn-success btn-block" action="#{userListBean.register()}">
+                            <span class="glyphicon glyphicon-floppy-save"></span>Register</h:commandLink>
+                        </f:ajax>
+                        <h:commandLink class="btn btn-default btn-block" immediate="true" action="#{userListBean.cancelNew()}">
+                            <span class="glyphicon glyphicon-remove-sign"></span> Cancel</h:commandLink>
+                    </div>
+                </div>
+                                <h:panelGroup layout="block" id='msg'>
+                                    <h:outputLabel class="alert alert-danger" rendered="#{not empty userListBean.message}" value="#{userListBean.message}" />
+                </h:panelGroup>
+            </ui:define>
+            <ui:define name="content">
+                <h3>New User</h3>
+                <hr />
+                <h:panelGroup layout="block" class="form-horizontal" id="user_info">
+                    <div class="form-group">
+                        <h:outputLabel for="tbxEmail" value="Email:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxEmail" value="#{userListBean.user.email}" required="true" class="form-control"
+                                         requiredMessage="Must be in a valid email format (e.g. christopher.messom@monash.edu).">
+                                <f:ajax event="blur" execute="@this" render="mEmail" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxEmail" id="mEmail" class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxPwd" value="Password:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputSecret id="tbxPwd" value="#{userListBean.user.password}" required="true" class="form-control"
+                                           requiredMessage="Please enter password.">
+                                <f:validator validatorId="passwordValidator" />
+                                <f:attribute name="confirm" value="#{confirmPwd.submittedValue}" />
+                                <f:ajax event="blur" execute="tbxPwd tbxPwd2" render="mPwd" />
+                            </h:inputSecret>
+                        </div>
+                        <h:message for="tbxPwd" id="mPwd"  class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxPwd2" value="Confirm:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputSecret id="tbxPwd2" required="true" binding="#{confirmPwd}" class="form-control"
+                                           requiredMessage="Please confirm password.">
+                                <f:ajax event="blur" execute="tbxPwd tbxPwd2" render="mPwd  mPwd2" />
+                            </h:inputSecret>
+                        </div>
+                        <h:message for="tbxPwd2" id="mPwd2"  class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxFName" value="First Name:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxFName" value="#{userListBean.user.firstName}" required="true" class="form-control"
+                                         requiredMessage="Please enter first name.">
+                                <f:ajax event="blur" execute="@this" render="mFName" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxFName" id="mFName"  class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxLName" value="Last Name:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxLName" value="#{userListBean.user.lastName}" required="true" class="form-control"
+                                         requiredMessage="Please enter last name.">
+                                <f:ajax event="blur" execute="@this" render="mLName" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxLName" id="mLName"  class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxPhone" value="Phone Number:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputText id="tbxPhone" value="#{userListBean.user.phone}" required="true" class="form-control"
+                                         requiredMessage="Please enter the phone number.">
+                                <f:ajax event="blur" execute="tbxPhone" render="mPhone" />
+                            </h:inputText>
+                        </div>
+                        <h:message for="tbxPhone" id="mPhone" class="col-sm-4 alert-danger" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="tbxAddress" value="Address:" class="col-sm-2" />
+                        <div class="col-sm-6">
+                            <h:inputTextarea id="tbxAddress" rows="5" value="#{userListBean.user.address}" class="form-control" />
+                        </div>
+                        <h:message for="tbxAddress"  class="col-sm-4 alert-danger" />
+                    </div>
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
